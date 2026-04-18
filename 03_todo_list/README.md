@@ -1,52 +1,48 @@
-# To-Do List App (Python)
+# To-Do List App (Project 3)
 
-A beginner-friendly command-line to-do list app built in Python.
+A command-line to-do manager for adding, viewing, completing, and deleting tasks.
 
-## Features
-- View all tasks with completion status (`✓` or `x`)
-- Add new tasks from terminal input
-- Mark tasks as done by selecting task number
-- Delete tasks by task number
-- Input checks for empty task names and invalid selections
-
-## Project Goal
-This project helps beginners practice:
-- Lists and dictionaries for storing task data
-- `while` loops for menu-driven programs
-- Conditional logic (`if`/`elif`/`else`)
-- Functions for organizing code into reusable parts
-- User input handling and basic validation
-
-## File Structure
-```text
-03_todo_list/
-├── todo.py
-└── README.md
-```
-
-## How to Run
-From the repository root:
-
+## Run
 ```bash
 python 03_todo_list/todo.py
 ```
 
-## Example
-```text
-===================================
-      To-Do List App
-===================================
-  1.View All Tasks
-  2. Add a task
-   3. Mark task as done
- 4.Delete a task
-===================================
+## Program Flow (Line-by-Line Explanation)
 
-Enter your choice (1-5): 2
-Enter task name: Finish homework
-Task ,Finish homework added successfully
-```
+### `todo.py`
+- **Lines 1-2**: File header comments with topic keywords.
+- **Lines 4-12**: `show_menu()` prints the app menu and available actions.
+- **Lines 14-21**: `view_tasks(tasks)`:
+  - Shows title.
+  - Handles empty task list.
+  - Uses `enumerate(..., start=1)` to print numbered tasks.
+  - Displays completion status using `✓` when done, otherwise `x`.
+- **Lines 22-28**: `add_task(tasks)`:
+  - Reads and trims task name.
+  - Rejects empty input.
+  - Appends a task dictionary: `{"name": name, "done": False}`.
+- **Lines 29-42**: `mark_done(tasks)`:
+  - Prevents action when list is empty.
+  - Shows tasks first.
+  - Reads task number safely with `int(...)` and `try/except`.
+  - Validates range and marks selected task as completed.
+- **Lines 43-56**: `delete_task(tasks)`:
+  - Prevents action when list is empty.
+  - Shows tasks and asks which one to remove.
+  - Validates number and removes task via `pop(index)`.
+- **Lines 58-77**: `main()`:
+  - Initializes empty `tasks` list.
+  - Runs loop showing menu and reading user choice.
+  - Dispatches choices `1..5` to view/add/mark/delete/exit.
+  - Handles invalid choices.
+- **Lines 78-79**: Entry point that runs `main()` when file is executed directly.
 
-## Notes
-- Tasks are stored in memory (no database/file persistence yet).
-- You can extend the app by adding save/load support (e.g., JSON), due dates, and priorities.
+## Key Data Structures
+- `tasks`: list of dictionaries, each shaped like:
+  - `name` (string)
+  - `done` (boolean)
+
+## Suggested Improvements
+- Add save/load with JSON so tasks persist after exit.
+- Add due dates and priority levels.
+- Add filter views (all/completed/pending).
